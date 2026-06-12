@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 
-const RETAILERS = ["Amazon","FragranceX","FragranceNet","FragFlex","Fragrance Navaeh","Jomashop","Beautyhouse","Maxaroma","Aura Fragrance","Olfactory","Mystic Perfume","Venba Fragrance"];
+const RETAILERS = ["Amazon","FragranceX","FragranceNet","FragFlex","Fragrance Navaeh","Jomashop","Beautyhouse","Maxaroma","Aura Fragrance","Olfactory","Mystic Perfume","Venba Fragrance","eBay","Sephora","Ulta","Nordstrom","Macy's","Walmart","Target","Beautylish"];
 
 const CATALOG = [
-  {name:"Bleu de Chanel",brand:"Chanel",size:"100ml EDP",cat:"designer",gender:"mens",prices:[{s:"FragranceNet",p:89.99,best:true},{s:"Jomashop",p:94.50},{s:"FragranceX",p:96.00},{s:"Amazon",p:107.50},{s:"Maxaroma",p:98.00}]},
-  {name:"Sauvage",brand:"Dior",size:"100ml EDT",cat:"designer",gender:"mens",prices:[{s:"FragranceX",p:79.99,best:true},{s:"FragranceNet",p:83.00},{s:"Jomashop",p:85.00},{s:"Beautyhouse",p:91.50},{s:"Amazon",p:94.20}]},
-  {name:"Black Opium",brand:"YSL",size:"90ml EDP",cat:"designer",gender:"womens",prices:[{s:"Maxaroma",p:72.00,best:true},{s:"FragranceNet",p:81.50},{s:"Jomashop",p:84.00},{s:"Aura Fragrance",p:88.00},{s:"Amazon",p:94.00}]},
-  {name:"Baccarat Rouge 540",brand:"Maison Margiela",size:"70ml EDP",cat:"niche",gender:"unisex",prices:[{s:"Olfactory",p:189.00,best:true},{s:"FragFlex",p:198.50},{s:"Venba Fragrance",p:195.00},{s:"Mystic Perfume",p:204.00},{s:"Amazon",p:210.00}]},
-  {name:"Good Girl",brand:"Carolina Herrera",size:"80ml EDP",cat:"designer",gender:"womens",prices:[{s:"Fragrance Navaeh",p:68.00,best:true},{s:"FragranceNet",p:74.00},{s:"Beautyhouse",p:77.50},{s:"Maxaroma",p:79.00},{s:"Amazon",p:82.00}]},
-  {name:"Aventus",brand:"Creed",size:"100ml EDP",cat:"niche",gender:"mens",prices:[{s:"FragFlex",p:289.00,best:true},{s:"Olfactory",p:295.00},{s:"Jomashop",p:299.00},{s:"Mystic Perfume",p:310.00},{s:"Amazon",p:325.00}]},
+  {name:"Bleu de Chanel",brand:"Chanel",size:"100ml EDP",cat:"designer",gender:"mens",prices:[{s:"FragranceNet",p:89.99,best:true},{s:"Jomashop",p:94.50},{s:"FragranceX",p:96.00},{s:"Sephora",p:112.00},{s:"Amazon",p:107.50},{s:"Nordstrom",p:115.00}]},
+  {name:"Sauvage",brand:"Dior",size:"100ml EDT",cat:"designer",gender:"mens",prices:[{s:"FragranceX",p:79.99,best:true},{s:"FragranceNet",p:83.00},{s:"Jomashop",p:85.00},{s:"Ulta",p:98.00},{s:"Sephora",p:98.00},{s:"Amazon",p:94.20}]},
+  {name:"Black Opium",brand:"YSL",size:"90ml EDP",cat:"designer",gender:"womens",prices:[{s:"Maxaroma",p:72.00,best:true},{s:"FragranceNet",p:81.50},{s:"Walmart",p:86.00},{s:"Ulta",p:96.00},{s:"Sephora",p:96.00},{s:"Amazon",p:94.00}]},
+  {name:"Baccarat Rouge 540",brand:"Maison Margiela",size:"70ml EDP",cat:"niche",gender:"unisex",prices:[{s:"Olfactory",p:189.00,best:true},{s:"FragFlex",p:198.50},{s:"Beautylish",p:200.00},{s:"Venba Fragrance",p:195.00},{s:"Nordstrom",p:215.00},{s:"Amazon",p:210.00}]},
+  {name:"Good Girl",brand:"Carolina Herrera",size:"80ml EDP",cat:"designer",gender:"womens",prices:[{s:"Fragrance Navaeh",p:68.00,best:true},{s:"FragranceNet",p:74.00},{s:"Target",p:78.00},{s:"Beautyhouse",p:77.50},{s:"Macy's",p:92.00},{s:"Amazon",p:82.00}]},
+  {name:"Aventus",brand:"Creed",size:"100ml EDP",cat:"niche",gender:"mens",prices:[{s:"FragFlex",p:289.00,best:true},{s:"Olfactory",p:295.00},{s:"Jomashop",p:299.00},{s:"Beautylish",p:305.00},{s:"Nordstrom",p:325.00},{s:"Amazon",p:325.00}]},
+  {name:"La Vie Est Belle",brand:"Lancôme",size:"100ml EDP",cat:"designer",gender:"womens",prices:[{s:"Walmart",p:72.00,best:true},{s:"Target",p:75.00},{s:"FragranceNet",p:78.00},{s:"Ulta",p:89.00},{s:"Sephora",p:92.00},{s:"Amazon",p:85.00}]},
+  {name:"Ombre Leather",brand:"Tom Ford",size:"100ml EDP",cat:"niche",gender:"unisex",prices:[{s:"Jomashop",p:149.00,best:true},{s:"Maxaroma",p:155.00},{s:"Nordstrom",p:185.00},{s:"Sephora",p:185.00},{s:"Amazon",p:172.00},{s:"eBay",p:162.00}]},
+  {name:"Flowerbomb",brand:"Viktor & Rolf",size:"100ml EDP",cat:"designer",gender:"womens",prices:[{s:"FragranceNet",p:98.00,best:true},{s:"Walmart",p:105.00},{s:"Ulta",p:119.00},{s:"Sephora",p:119.00},{s:"Macy's",p:122.00},{s:"Amazon",p:112.00}]},
+  {name:"Y Eau de Parfum",brand:"Yves Saint Laurent",size:"100ml EDP",cat:"designer",gender:"mens",prices:[{s:"Aura Fragrance",p:74.00,best:true},{s:"FragranceX",p:79.00},{s:"Walmart",p:82.00},{s:"Ulta",p:95.00},{s:"Sephora",p:95.00},{s:"Amazon",p:89.00}]},
 ];
 
 const styles = {
@@ -25,7 +29,7 @@ const styles = {
   searchWrap:{display:'flex',maxWidth:500,margin:'0 auto 1.25rem',background:'#141414',border:'0.5px solid rgba(255,255,255,0.13)',borderRadius:4,overflow:'hidden'},
   searchInput:{flex:1,background:'transparent',border:'none',outline:'none',padding:'13px 16px',fontFamily:"'DM Sans',sans-serif",fontSize:13,fontWeight:300,color:'#e8e8e8'},
   searchBtn:{padding:'13px 22px',background:'#22c55e',border:'none',fontFamily:"'DM Sans',sans-serif",fontSize:11,fontWeight:500,letterSpacing:'0.12em',textTransform:'uppercase',color:'#000',cursor:'pointer'},
-  retailers:{display:'flex',justifyContent:'center',flexWrap:'wrap',gap:6,maxWidth:560,margin:'0 auto'},
+  retailers:{display:'flex',justifyContent:'center',flexWrap:'wrap',gap:6,maxWidth:620,margin:'0 auto'},
   rpill:{fontSize:10,letterSpacing:'0.06em',padding:'3px 9px',border:'0.5px solid #2a2a2a',borderRadius:20,color:'#444',textTransform:'uppercase'},
   stats:{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:10,padding:'1.75rem 1.75rem 0'},
   stat:{background:'#141414',border:'0.5px solid rgba(255,255,255,0.06)',borderRadius:8,padding:'1rem 1.25rem'},
@@ -100,7 +104,7 @@ export default function App() {
         </nav>
 
         <div style={styles.hero}>
-          <div style={styles.eyebrow}>Price comparison · 12 retailers · 50,000+ fragrances</div>
+          <div style={styles.eyebrow}>Price comparison · 20 retailers · 50,000+ fragrances</div>
           <div style={styles.heroTitle}>Find the <em style={styles.heroEm}>scent.</em><br/>Skip the markup.</div>
           <div style={styles.heroSub}>We check every retailer so you don't have to.</div>
           <div style={styles.searchWrap}>
@@ -113,7 +117,7 @@ export default function App() {
         </div>
 
         <div style={styles.stats}>
-          {[{n:'50K+',l:'Fragrances tracked'},{n:'12',l:'Retailers compared'},{n:'$38',l:'Avg. user savings'}].map(s => (
+          {[{n:'50K+',l:'Fragrances tracked'},{n:'20',l:'Retailers compared'},{n:'$38',l:'Avg. user savings'}].map(s => (
             <div key={s.l} style={styles.stat}>
               <div style={styles.statNum}>{s.n}</div>
               <div style={styles.statLbl}>{s.l}</div>
