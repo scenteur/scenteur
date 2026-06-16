@@ -214,7 +214,22 @@ export default function App() {
             );
           })}
         </div>
-
+<div style={{background:'#111',border:'0.5px solid rgba(255,255,255,0.07)',borderRadius:10,padding:'2rem',margin:'2rem 1.75rem 0',textAlign:'center'}}>
+  <div style={{fontFamily:"'Playfair Display',serif",fontSize:22,fontWeight:700,color:'#fff',marginBottom:8}}>Get the best deals first</div>
+  <div style={{fontSize:13,color:'#555',marginBottom:16}}>Join thousands of fragrance hunters saving money every week</div>
+  <div style={{display:'flex',maxWidth:400,margin:'0 auto',gap:8}}>
+    <input id="brevo-email" type="email" placeholder="your@email.com" style={{flex:1,background:'#1a1a1a',border:'0.5px solid #333',borderRadius:4,padding:'11px 14px',color:'#e8e8e8',fontSize:13,outline:'none'}}/>
+    <button onClick={() => {
+      const email = document.getElementById('brevo-email').value;
+      if(!email) return;
+      fetch('https://230da550.sibforms.com/serve/MUIFAOpKxDBubhblRi_L9Zk2DgiSOaegTvJScLsvePm9qSFBMwAfb2UmJpJWA3AjCGHr4Umsx8SBGcNGOjlemz4ArHQawMCUglejaQdVm8pHQW7kKKLdWiohQaiNFEP7h0Hh1Z3cpTAu2z5jUjztv0KwxaJVGdD1Z7Fdgnez6YNmHWoCp_VgP1jUouuM7WMg3SOxJksvEwYt-DFUYw==', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:`EMAIL=${encodeURIComponent(email)}&locale=en&email_address_check=`})
+      .then(() => { document.getElementById('brevo-email').value=''; alert('You\'re in! Welcome to Scenteur 🔥'); })
+      .catch(() => alert('Something went wrong, try again!'));
+    }} style={{padding:'11px 20px',background:'#22c55e',border:'none',borderRadius:4,color:'#000',fontSize:12,fontWeight:500,letterSpacing:'0.1em',textTransform:'uppercase',cursor:'pointer'}}>
+      Join
+    </button>
+  </div>
+</div>
         <div style={styles.footer}>
           <span>Scenteur © 2026</span>
           <span>Prices refresh every 6 hours</span>
