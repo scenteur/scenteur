@@ -2,20 +2,22 @@ import React, { useState, useEffect } from 'react';
 
 const RETAILERS = ["Amazon","FragranceX","FragranceNet","FragFlex","Fragrance Navaeh","Jomashop","Beautyhouse","Maxaroma","Aura Fragrance","Olfactory","Mystic Perfume","Venba Fragrance","eBay","Sephora","Ulta","Nordstrom","Macy's","Walmart","Target","Beautylish"];
 
+const TAG = 'scenteur-20';
+
 const PRICES = {
-  "Imagination": [{s:"FragranceNet",p:189.99,best:true,link:"https://amzn.to/4viUknk"},{s:"Jomashop",p:199.00},{s:"Amazon",p:215.00},{s:"Nordstrom",p:229.00}],
-  "Sauvage": [{s:"FragranceX",p:79.99,best:true,link:"https://amzn.to/4vNA0dp"},{s:"FragranceNet",p:83.00},{s:"Jomashop",p:85.00},{s:"Ulta",p:98.00},{s:"Amazon",p:94.20}],
-  "Aventus": [{s:"FragFlex",p:289.00,best:true,link:"https://amzn.to/4vYDbzf"},{s:"Olfactory",p:295.00},{s:"Jomashop",p:299.00},{s:"Nordstrom",p:325.00},{s:"Amazon",p:325.00}],
-  "Layton": [{s:"FragranceNet",p:142.00,best:true,link:"https://amzn.to/4vy3ywd"},{s:"Jomashop",p:149.00},{s:"Maxaroma",p:155.00},{s:"Amazon",p:169.00}],
-  "Khamrah": [{s:"Aura Fragrance",p:38.00,best:true,link:"https://amzn.to/4xsHbJH"},{s:"Maxaroma",p:42.00},{s:"Amazon",p:49.00},{s:"FragranceNet",p:44.00}],
-  "Y Eau de Parfum": [{s:"Aura Fragrance",p:74.00,best:true,link:"https://amzn.to/4eqAwXX"},{s:"FragranceX",p:79.00},{s:"Ulta",p:95.00},{s:"Amazon",p:89.00}],
-  "Le Male Le Parfum": [{s:"FragranceNet",p:82.00,best:true,link:"https://amzn.to/43AUwlE"},{s:"Jomashop",p:87.00},{s:"Amazon",p:98.00},{s:"Macy's",p:105.00}],
-  "Angels' Share": [{s:"Beautylish",p:265.00,best:true,link:"https://amzn.to/43FKgIN"},{s:"Nordstrom",p:280.00},{s:"Amazon",p:295.00}],
-  "MYSLF Eau de Parfum": [{s:"FragranceNet",p:88.00,best:true,link:"https://amzn.to/3SJMtk2"},{s:"Ulta",p:105.00},{s:"Sephora",p:105.00},{s:"Amazon",p:98.00}],
-  "Le Male Elixir": [{s:"FragranceX",p:89.00,best:true,link:"https://amzn.to/4vlt3Rg"},{s:"FragranceNet",p:94.00},{s:"Amazon",p:109.00},{s:"Macy's",p:115.00}],
-  "Grand Soir": [{s:"Olfactory",p:219.00,best:true,link:"https://amzn.to/4efbDzD"},{s:"Beautylish",p:229.00},{s:"Nordstrom",p:245.00},{s:"Amazon",p:238.00}],
-  "The Most Wanted": [{s:"FragranceNet",p:68.00,best:true,link:"https://amzn.to/4uKy7NV"},{s:"Walmart",p:72.00},{s:"Amazon",p:79.00},{s:"Ulta",p:85.00}],
-  "Explorer": [{s:"FragranceNet",p:58.00,best:true},{s:"Walmart",p:62.00},{s:"Amazon",p:71.00},{s:"Macy's",p:78.00}],
+  "Imagination": [{s:"FragranceNet",p:189.99,best:true,link:`https://www.amazon.com/s?k=Louis+Vuitton+Imagination&tag=${TAG}`},{s:"Jomashop",p:199.00},{s:"Amazon",p:215.00},{s:"Nordstrom",p:229.00}],
+  "Sauvage": [{s:"FragranceX",p:79.99,best:true,link:`https://www.amazon.com/s?k=Dior+Sauvage+100ml+EDT&tag=${TAG}`},{s:"FragranceNet",p:83.00},{s:"Jomashop",p:85.00},{s:"Ulta",p:98.00},{s:"Amazon",p:94.20}],
+  "Aventus": [{s:"FragFlex",p:289.00,best:true,link:`https://www.amazon.com/s?k=Creed+Aventus+100ml&tag=${TAG}`},{s:"Olfactory",p:295.00},{s:"Jomashop",p:299.00},{s:"Nordstrom",p:325.00},{s:"Amazon",p:325.00}],
+  "Layton": [{s:"FragranceNet",p:142.00,best:true,link:`https://www.amazon.com/s?k=Parfums+de+Marly+Layton&tag=${TAG}`},{s:"Jomashop",p:149.00},{s:"Maxaroma",p:155.00},{s:"Amazon",p:169.00}],
+  "Khamrah": [{s:"Aura Fragrance",p:38.00,best:true,link:`https://www.amazon.com/s?k=Lattafa+Khamrah&tag=${TAG}`},{s:"Maxaroma",p:42.00},{s:"Amazon",p:49.00},{s:"FragranceNet",p:44.00}],
+  "Y Eau de Parfum": [{s:"Aura Fragrance",p:74.00,best:true,link:`https://www.amazon.com/s?k=YSL+Y+Eau+de+Parfum&tag=${TAG}`},{s:"FragranceX",p:79.00},{s:"Ulta",p:95.00},{s:"Amazon",p:89.00}],
+  "Le Male Le Parfum": [{s:"FragranceNet",p:82.00,best:true,link:`https://www.amazon.com/s?k=Jean+Paul+Gaultier+Le+Male+Le+Parfum&tag=${TAG}`},{s:"Jomashop",p:87.00},{s:"Amazon",p:98.00},{s:"Macy's",p:105.00}],
+  "Angels' Share": [{s:"Beautylish",p:265.00,best:true,link:`https://www.amazon.com/s?k=By+Kilian+Angels+Share&tag=${TAG}`},{s:"Nordstrom",p:280.00},{s:"Amazon",p:295.00}],
+  "MYSLF Eau de Parfum": [{s:"FragranceNet",p:88.00,best:true,link:`https://www.amazon.com/s?k=YSL+MYSLF+Eau+de+Parfum&tag=${TAG}`},{s:"Ulta",p:105.00},{s:"Sephora",p:105.00},{s:"Amazon",p:98.00}],
+  "Le Male Elixir": [{s:"FragranceX",p:89.00,best:true,link:`https://www.amazon.com/s?k=Jean+Paul+Gaultier+Le+Male+Elixir&tag=${TAG}`},{s:"FragranceNet",p:94.00},{s:"Amazon",p:109.00},{s:"Macy's",p:115.00}],
+  "Grand Soir": [{s:"Olfactory",p:219.00,best:true,link:`https://www.amazon.com/s?k=Maison+Francis+Kurkdjian+Grand+Soir&tag=${TAG}`},{s:"Beautylish",p:229.00},{s:"Nordstrom",p:245.00},{s:"Amazon",p:238.00}],
+  "The Most Wanted": [{s:"FragranceNet",p:68.00,best:true,link:`https://www.amazon.com/s?k=Azzaro+The+Most+Wanted&tag=${TAG}`},{s:"Walmart",p:72.00},{s:"Amazon",p:79.00},{s:"Ulta",p:85.00}],
+  "Explorer": [{s:"FragranceNet",p:58.00,best:true,link:`https://www.amazon.com/s?k=Montblanc+Explorer&tag=${TAG}`},{s:"Walmart",p:62.00},{s:"Amazon",p:71.00},{s:"Macy's",p:78.00}],
 };
 
 const styles = {
@@ -176,6 +178,7 @@ export default function App() {
             const notes = f.notes || [];
             const score = f.reviewsScoreAvg;
             const reviews = f.reviewsCount;
+            const amazonLink = `https://www.amazon.com/s?k=${encodeURIComponent(f.name + ' ' + brandName)}&tag=${TAG}`;
 
             return (
               <div key={f.id} style={isExpanded ? styles.cardExpanded : styles.card} onClick={() => setExpanded(isExpanded ? null : f.id)}>
@@ -219,10 +222,9 @@ export default function App() {
                 )}
 
                 <div style={styles.actions} onClick={e => e.stopPropagation()}>
-                  {best?.link
-                    ? <a href={best.link} target="_blank" rel="noopener noreferrer" style={{...styles.btnP, textDecoration:'none', display:'flex', alignItems:'center', justifyContent:'center'}}>Shop best price →</a>
-                    : <button style={styles.btnP}>Shop best price →</button>
-                  }
+                  <a href={best?.link || amazonLink} target="_blank" rel="noopener noreferrer" style={{...styles.btnP, textDecoration:'none', display:'flex', alignItems:'center', justifyContent:'center'}}>
+                    Shop best price →
+                  </a>
                   <button style={styles.btnG}>🔔</button>
                   <button style={styles.btnG}>⇄</button>
                 </div>
