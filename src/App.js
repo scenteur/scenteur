@@ -3,18 +3,18 @@ import React, { useState, useEffect } from 'react';
 const RETAILERS = ["Amazon","FragranceX","FragranceNet","FragFlex","Fragrance Navaeh","Jomashop","Beautyhouse","Maxaroma","Aura Fragrance","Olfactory","Mystic Perfume","Venba Fragrance","eBay","Sephora","Ulta","Nordstrom","Macy's","Walmart","Target","Beautylish"];
 
 const PRICES = {
-  "Imagination": [{s:"FragranceNet",p:189.99,best:true},{s:"Jomashop",p:199.00},{s:"Amazon",p:215.00},{s:"Nordstrom",p:229.00}],
-  "Sauvage": [{s:"FragranceX",p:79.99,best:true},{s:"FragranceNet",p:83.00},{s:"Jomashop",p:85.00},{s:"Ulta",p:98.00},{s:"Amazon",p:94.20}],
-  "Aventus": [{s:"FragFlex",p:289.00,best:true},{s:"Olfactory",p:295.00},{s:"Jomashop",p:299.00},{s:"Nordstrom",p:325.00},{s:"Amazon",p:325.00}],
-  "Layton": [{s:"FragranceNet",p:142.00,best:true},{s:"Jomashop",p:149.00},{s:"Maxaroma",p:155.00},{s:"Amazon",p:169.00}],
-  "Khamrah": [{s:"Aura Fragrance",p:38.00,best:true},{s:"Maxaroma",p:42.00},{s:"Amazon",p:49.00},{s:"FragranceNet",p:44.00}],
-  "Y Eau de Parfum": [{s:"Aura Fragrance",p:74.00,best:true},{s:"FragranceX",p:79.00},{s:"Ulta",p:95.00},{s:"Amazon",p:89.00}],
-  "Le Male Le Parfum": [{s:"FragranceNet",p:82.00,best:true},{s:"Jomashop",p:87.00},{s:"Amazon",p:98.00},{s:"Macy's",p:105.00}],
-  "Angels' Share": [{s:"Beautylish",p:265.00,best:true},{s:"Nordstrom",p:280.00},{s:"Amazon",p:295.00}],
-  "MYSLF Eau de Parfum": [{s:"FragranceNet",p:88.00,best:true},{s:"Ulta",p:105.00},{s:"Sephora",p:105.00},{s:"Amazon",p:98.00}],
-  "Le Male Elixir": [{s:"FragranceX",p:89.00,best:true},{s:"FragranceNet",p:94.00},{s:"Amazon",p:109.00},{s:"Macy's",p:115.00}],
-  "Grand Soir": [{s:"Olfactory",p:219.00,best:true},{s:"Beautylish",p:229.00},{s:"Nordstrom",p:245.00},{s:"Amazon",p:238.00}],
-  "The Most Wanted": [{s:"FragranceNet",p:68.00,best:true},{s:"Walmart",p:72.00},{s:"Amazon",p:79.00},{s:"Ulta",p:85.00}],
+  "Imagination": [{s:"FragranceNet",p:189.99,best:true,link:"https://amzn.to/4viUknk"},{s:"Jomashop",p:199.00},{s:"Amazon",p:215.00},{s:"Nordstrom",p:229.00}],
+  "Sauvage": [{s:"FragranceX",p:79.99,best:true,link:"https://amzn.to/4vNA0dp"},{s:"FragranceNet",p:83.00},{s:"Jomashop",p:85.00},{s:"Ulta",p:98.00},{s:"Amazon",p:94.20}],
+  "Aventus": [{s:"FragFlex",p:289.00,best:true,link:"https://amzn.to/4vYDbzf"},{s:"Olfactory",p:295.00},{s:"Jomashop",p:299.00},{s:"Nordstrom",p:325.00},{s:"Amazon",p:325.00}],
+  "Layton": [{s:"FragranceNet",p:142.00,best:true,link:"https://amzn.to/4vy3ywd"},{s:"Jomashop",p:149.00},{s:"Maxaroma",p:155.00},{s:"Amazon",p:169.00}],
+  "Khamrah": [{s:"Aura Fragrance",p:38.00,best:true,link:"https://amzn.to/4xsHbJH"},{s:"Maxaroma",p:42.00},{s:"Amazon",p:49.00},{s:"FragranceNet",p:44.00}],
+  "Y Eau de Parfum": [{s:"Aura Fragrance",p:74.00,best:true,link:"https://amzn.to/4eqAwXX"},{s:"FragranceX",p:79.00},{s:"Ulta",p:95.00},{s:"Amazon",p:89.00}],
+  "Le Male Le Parfum": [{s:"FragranceNet",p:82.00,best:true,link:"https://amzn.to/43AUwlE"},{s:"Jomashop",p:87.00},{s:"Amazon",p:98.00},{s:"Macy's",p:105.00}],
+  "Angels' Share": [{s:"Beautylish",p:265.00,best:true,link:"https://amzn.to/43FKgIN"},{s:"Nordstrom",p:280.00},{s:"Amazon",p:295.00}],
+  "MYSLF Eau de Parfum": [{s:"FragranceNet",p:88.00,best:true,link:"https://amzn.to/3SJMtk2"},{s:"Ulta",p:105.00},{s:"Sephora",p:105.00},{s:"Amazon",p:98.00}],
+  "Le Male Elixir": [{s:"FragranceX",p:89.00,best:true,link:"https://amzn.to/4vlt3Rg"},{s:"FragranceNet",p:94.00},{s:"Amazon",p:109.00},{s:"Macy's",p:115.00}],
+  "Grand Soir": [{s:"Olfactory",p:219.00,best:true,link:"https://amzn.to/4efbDzD"},{s:"Beautylish",p:229.00},{s:"Nordstrom",p:245.00},{s:"Amazon",p:238.00}],
+  "The Most Wanted": [{s:"FragranceNet",p:68.00,best:true,link:"https://amzn.to/4uKy7NV"},{s:"Walmart",p:72.00},{s:"Amazon",p:79.00},{s:"Ulta",p:85.00}],
   "Explorer": [{s:"FragranceNet",p:58.00,best:true},{s:"Walmart",p:62.00},{s:"Amazon",p:71.00},{s:"Macy's",p:78.00}],
 };
 
@@ -69,6 +69,12 @@ const styles = {
   notesTitle:{fontSize:11,letterSpacing:'0.18em',textTransform:'uppercase',color:'#555',marginBottom:'0.75rem'},
   notesList:{display:'flex',flexWrap:'wrap',gap:6},
   noteTag:{display:'inline-block',fontSize:12,padding:'3px 10px',background:'#222',borderRadius:20,color:'#888',border:'0.5px solid #2a2a2a'},
+  emailSection:{background:'#111',border:'0.5px solid rgba(255,255,255,0.07)',borderRadius:10,padding:'2rem',margin:'2rem 1.75rem 0',textAlign:'center'},
+  emailTitle:{fontFamily:"'Playfair Display',serif",fontSize:22,fontWeight:700,color:'#fff',marginBottom:8},
+  emailSub:{fontSize:13,color:'#555',marginBottom:16},
+  emailWrap:{display:'flex',maxWidth:400,margin:'0 auto',gap:8},
+  emailInput:{flex:1,background:'#1a1a1a',border:'0.5px solid #333',borderRadius:4,padding:'11px 14px',color:'#e8e8e8',fontSize:13,outline:'none'},
+  emailBtn:{padding:'11px 20px',background:'#22c55e',border:'none',borderRadius:4,color:'#000',fontSize:12,fontWeight:500,letterSpacing:'0.1em',textTransform:'uppercase',cursor:'pointer'},
   footer:{borderTop:'0.5px solid rgba(255,255,255,0.07)',margin:'2.5rem 1.75rem 0',paddingTop:'1.25rem',display:'flex',justifyContent:'space-between',fontSize:12,letterSpacing:'0.08em',textTransform:'uppercase',color:'#333'},
 };
 
@@ -80,24 +86,31 @@ export default function App() {
   const [catalog, setCatalog] = useState([]);
   const [expanded, setExpanded] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
 
   useEffect(() => {
     fetch('https://scenteur-api.onrender.com/api/fragrances/top')
       .then(r => r.json())
       .then(data => {
-        try {
-          let items = [];
-          if (Array.isArray(data)) items = data;
-          else if (data?.results?.[0]?.hits) items = data.results[0].hits;
-          else if (data?.hits) items = data.hits;
-          setCatalog(items);
-        } catch(e) {
-          setCatalog([]);
-        }
+        let items = [];
+        if (Array.isArray(data)) items = data;
+        else if (data?.results?.[0]?.hits) items = data.results[0].hits;
+        else if (data?.hits) items = data.hits;
+        setCatalog(items);
         setLoading(false);
       })
       .catch(() => setLoading(false));
   }, []);
+
+  const handleSubscribe = () => {
+    if (!email) return;
+    fetch('https://230da550.sibforms.com/serve/MUIFAOpKxDBubhblRi_L9Zk2DgiSOaegTvJScLsvePm9qSFBMwAfb2UmJpJWA3AjCGHr4Umsx8SBGcNGOjlemz4ArHQawMCUglejaQdVm8pHQW7kKKLdWiohQaiNFEP7h0Hh1Z3cpTAu2z5jUjztv0KwxaJVGdD1Z7Fdgnez6YNmHWoCp_VgP1jUouuM7WMg3SOxJksvEwYt-DFUYw==', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: `EMAIL=${encodeURIComponent(email)}&locale=en&email_address_check=`
+    }).then(() => { setSubscribed(true); setEmail(''); }).catch(() => {});
+  };
 
   const filtered = catalog.filter(f => {
     const name = f.name || '';
@@ -206,7 +219,10 @@ export default function App() {
                 )}
 
                 <div style={styles.actions} onClick={e => e.stopPropagation()}>
-                  <button style={styles.btnP}>Shop best price →</button>
+                  {best?.link
+                    ? <a href={best.link} target="_blank" rel="noopener noreferrer" style={{...styles.btnP, textDecoration:'none', display:'flex', alignItems:'center', justifyContent:'center'}}>Shop best price →</a>
+                    : <button style={styles.btnP}>Shop best price →</button>
+                  }
                   <button style={styles.btnG}>🔔</button>
                   <button style={styles.btnG}>⇄</button>
                 </div>
@@ -214,22 +230,19 @@ export default function App() {
             );
           })}
         </div>
-<div style={{background:'#111',border:'0.5px solid rgba(255,255,255,0.07)',borderRadius:10,padding:'2rem',margin:'2rem 1.75rem 0',textAlign:'center'}}>
-  <div style={{fontFamily:"'Playfair Display',serif",fontSize:22,fontWeight:700,color:'#fff',marginBottom:8}}>Get the best deals first</div>
-  <div style={{fontSize:13,color:'#555',marginBottom:16}}>Join thousands of fragrance hunters saving money every week</div>
-  <div style={{display:'flex',maxWidth:400,margin:'0 auto',gap:8}}>
-    <input id="brevo-email" type="email" placeholder="your@email.com" style={{flex:1,background:'#1a1a1a',border:'0.5px solid #333',borderRadius:4,padding:'11px 14px',color:'#e8e8e8',fontSize:13,outline:'none'}}/>
-    <button onClick={() => {
-      const email = document.getElementById('brevo-email').value;
-      if(!email) return;
-      fetch('https://230da550.sibforms.com/serve/MUIFAOpKxDBubhblRi_L9Zk2DgiSOaegTvJScLsvePm9qSFBMwAfb2UmJpJWA3AjCGHr4Umsx8SBGcNGOjlemz4ArHQawMCUglejaQdVm8pHQW7kKKLdWiohQaiNFEP7h0Hh1Z3cpTAu2z5jUjztv0KwxaJVGdD1Z7Fdgnez6YNmHWoCp_VgP1jUouuM7WMg3SOxJksvEwYt-DFUYw==', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:`EMAIL=${encodeURIComponent(email)}&locale=en&email_address_check=`})
-      .then(() => { document.getElementById('brevo-email').value=''; alert('You\'re in! Welcome to Scenteur 🔥'); })
-      .catch(() => alert('Something went wrong, try again!'));
-    }} style={{padding:'11px 20px',background:'#22c55e',border:'none',borderRadius:4,color:'#000',fontSize:12,fontWeight:500,letterSpacing:'0.1em',textTransform:'uppercase',cursor:'pointer'}}>
-      Join
-    </button>
-  </div>
-</div>
+
+        <div style={styles.emailSection}>
+          <div style={styles.emailTitle}>Get the best deals first</div>
+          <div style={styles.emailSub}>Join thousands of fragrance hunters saving money every week</div>
+          {subscribed
+            ? <div style={{color:'#22c55e',fontSize:14,fontWeight:500}}>You're in! Welcome to Scenteur 🔥</div>
+            : <div style={styles.emailWrap}>
+                <input style={styles.emailInput} type="email" placeholder="your@email.com" value={email} onChange={e => setEmail(e.target.value)} onKeyDown={e => e.key==='Enter' && handleSubscribe()}/>
+                <button style={styles.emailBtn} onClick={handleSubscribe}>Join</button>
+              </div>
+          }
+        </div>
+
         <div style={styles.footer}>
           <span>Scenteur © 2026</span>
           <span>Prices refresh every 6 hours</span>
