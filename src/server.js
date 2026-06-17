@@ -14,7 +14,7 @@ app.get('/api/fragrances/search', async (req, res) => {
   try {
     const response = await axios.post(
       'https://fragrance-api.p.rapidapi.com/multi-search',
-      { queries: [{ indexUid: 'fragrances', q: query || '', limit: 20, offset: 0 }] },
+      { queries: [{ indexUid: 'fragrances', q: query || '', limit: 100, offset: 0 }] },
       { headers: { 'Content-Type': 'application/json', 'x-rapidapi-key': RAPIDAPI_KEY, 'x-rapidapi-host': RAPIDAPI_HOST } }
     );
     res.json(response.data.results?.[0]?.hits || []);
@@ -28,7 +28,7 @@ app.get('/api/fragrances/top', async (req, res) => {
   try {
     const response = await axios.post(
       'https://fragrance-api.p.rapidapi.com/multi-search',
-      { queries: [{ indexUid: 'fragrances', q: '', limit: 20, offset: 0 }] },
+      { queries: [{ indexUid: 'fragrances', q: '', limit: 100, offset: 0 }] },
       { headers: { 'Content-Type': 'application/json', 'x-rapidapi-key': RAPIDAPI_KEY, 'x-rapidapi-host': RAPIDAPI_HOST } }
     );
     res.json(response.data.results?.[0]?.hits || []);
