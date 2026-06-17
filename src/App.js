@@ -117,9 +117,10 @@ export default function App() {
   const filtered = catalog.filter(f => {
     const name = f.name || '';
     const brand = f.brand?.name || '';
+    const excludedBrands = ['Louis Vuitton'];
+    if (excludedBrands.includes(brand)) return false;
     return name.toLowerCase().includes(search.toLowerCase()) || brand.toLowerCase().includes(search.toLowerCase());
   });
-
   return (
     <>
       <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
