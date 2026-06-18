@@ -120,16 +120,15 @@ export default function App() {
     const excludedBrands = ['Louis Vuitton'];
     if (excludedBrands.includes(brand)) return false;
     const matchSearch = name.toLowerCase().includes(search.toLowerCase()) || brand.toLowerCase().includes(search.toLowerCase());
-    const notes = (f.notes || []).map(n => (n.name || '').toLowerCase());
+    const designerBrands = ['Chanel','Dior','YSL','Yves Saint Laurent','Giorgio Armani','Dolce & Gabbana','Gucci','Versace','Paco Rabanne','Carolina Herrera','Lancôme','Viktor & Rolf','Calvin Klein','Hugo Boss','Burberry','Prada','Valentino','Jean Paul Gaultier','Guerlain','Montblanc','Azzaro'];
     let matchFilter = true;
     if (active === 'niche') {
-      matchFilter = f.popularityScore ? f.popularityScore < 1500 : true;
+      matchFilter = !designerBrands.includes(brand);
     } else if (active === 'designer') {
-      matchFilter = f.popularityScore ? f.popularityScore >= 1500 : true;
+      matchFilter = designerBrands.includes(brand);
     }
     return matchSearch && matchFilter;
   });
-  return (
   return (
     <>
       <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
