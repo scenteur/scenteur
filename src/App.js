@@ -119,8 +119,17 @@ export default function App() {
     const brand = f.brand?.name || '';
     const excludedBrands = ['Louis Vuitton'];
     if (excludedBrands.includes(brand)) return false;
-    return name.toLowerCase().includes(search.toLowerCase()) || brand.toLowerCase().includes(search.toLowerCase());
+    const matchSearch = name.toLowerCase().includes(search.toLowerCase()) || brand.toLowerCase().includes(search.toLowerCase());
+    const notes = (f.notes || []).map(n => (n.name || '').toLowerCase());
+    let matchFilter = true;
+    if (active === 'niche') {
+      matchFilter = f.popularityScore ? f.popularityScore < 1500 : true;
+    } else if (active === 'designer') {
+      matchFilter = f.popularityScore ? f.popularityScore >= 1500 : true;
+    }
+    return matchSearch && matchFilter;
   });
+  return (
   return (
     <>
       <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
