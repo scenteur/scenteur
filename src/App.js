@@ -80,7 +80,7 @@ const styles = {
   footer:{borderTop:'0.5px solid rgba(255,255,255,0.07)',margin:'2.5rem 1.75rem 0',paddingTop:'1.25rem',display:'flex',justifyContent:'space-between',fontSize:12,letterSpacing:'0.08em',textTransform:'uppercase',color:'#333'},
 };
 
-const FILTERS = [{key:'all',label:'All'},{key:'niche',label:'Niche'},{key:'designer',label:'Designer'}];
+const FILTERS = [{key:'all',label:'All'},{key:'niche',label:'Niche'},{key:'designer',label:'Designer'},{key:'middle-eastern',label:'Middle Eastern'}];
 
 export default function App() {
   const [active, setActive] = useState('all');
@@ -121,16 +121,14 @@ export default function App() {
     if (excludedBrands.includes(brand)) return false;
     const matchSearch = name.toLowerCase().includes(search.toLowerCase()) || brand.toLowerCase().includes(search.toLowerCase());
     const designerBrands = ['Chanel','Dior','YSL','Yves Saint Laurent','Giorgio Armani','Dolce & Gabbana','Gucci','Versace','Paco Rabanne','Carolina Herrera','Lancôme','Viktor & Rolf','Calvin Klein','Hugo Boss','Burberry','Prada','Valentino','Jean Paul Gaultier','Guerlain','Montblanc','Azzaro'];
+    const middleEasternBrands = ['Lattafa Perfumes','Lattafa','Ajmal','Rasasi','Al Haramain','Swiss Arabian','Armaf','Arabiyat Prestige','Nabeel','Surrati'];
     let matchFilter = true;
     if (active === 'niche') {
-      matchFilter = !designerBrands.includes(brand);
+      matchFilter = !designerBrands.includes(brand) && !middleEasternBrands.includes(brand);
     } else if (active === 'designer') {
       matchFilter = designerBrands.includes(brand);
-    }
-    return matchSearch && matchFilter;
-  });
-  return (
-    <>
+    } else if (active === 'middle-eastern') {
+      matchFilter = middleEasternBrands.includes(brand);
       <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
       <div style={styles.root}>
         <nav style={styles.nav}>
