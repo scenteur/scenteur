@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import { Link } from 'react-router-dom';
 const RETAILERS = ["Amazon","FragranceX","FragranceNet","FragFlex","Fragrance Navaeh","Jomashop","Beautyhouse","Maxaroma","Aura Fragrance","Olfactory","Mystic Perfume","Venba Fragrance","eBay","Sephora","Ulta","Nordstrom","Macy's","Walmart","Target","Beautylish"];
 
 const TAG = 'scenteur-20';
@@ -129,11 +129,6 @@ export default function App() {
       matchFilter = designerBrands.includes(brand);
     } else if (active === 'middle-eastern') {
       matchFilter = middleEasternBrands.includes(brand);
-    }
-    return matchSearch && matchFilter;
-  });
-  return (
-    <>
       <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
       <div style={styles.root}>
         <nav style={styles.nav}>
@@ -259,7 +254,7 @@ export default function App() {
 
         <div style={styles.footer}>
           <span>Scenteur © 2026</span>
-          <span>Prices refresh every 6 hours</span>
+          <span><Link to="/privacy" style={{color:'#333',textDecoration:'none'}}>Privacy Policy</Link> · <Link to="/terms" style={{color:'#333',textDecoration:'none'}}>Terms</Link></span>
           <span>Affiliate links apply</span>
         </div>
       </div>
