@@ -129,6 +129,11 @@ export default function App() {
       matchFilter = designerBrands.includes(brand);
     } else if (active === 'middle-eastern') {
       matchFilter = middleEasternBrands.includes(brand);
+    }
+    return matchSearch && matchFilter;
+  });
+  return (
+    <>
       <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
       <div style={styles.root}>
         <nav style={styles.nav}>
