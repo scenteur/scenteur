@@ -5,7 +5,10 @@ const RETAILERS = ["Amazon","FragranceX","FragranceNet","FragFlex","Fragrance Na
 const TAG = 'scenteur-20';
 
 const PRICES = {
-  "Imagination": [{s:"FragranceNet",p:189.99,best:true,link:`https://www.amazon.com/s?k=Louis+Vuitton+Imagination&tag=${TAG}`},{s:"Jomashop",p:199.00},{s:"Amazon",p:215.00},{s:"Nordstrom",p:229.00}],
+  "Imagination": 
+"Le Male Elixir Absolu": [{s:"FragranceNet",p:107.00,best:true,link:`https://www.amazon.com/s?k=Jean+Paul+Gaultier+Le+Male+Elixir+Absolu&tag=${TAG}`},{s:"Jomashop",p:110.00},{s:"FragranceX",p:113.27},{s:"Macy's",p:127.50}],
+  "Vibrato": [{s:"FragranceNet",p:99.99,best:true,link:`https://www.amazon.com/s?k=Sospiro+Vibrato&tag=${TAG}`},{s:"Jomashop",p:189.89},{s:"Amazon",p:215.00}],
+  "Le Male": [{s:"FragranceNet",p:42.89,best:true,link:`https://www.amazon.com/s?k=Jean+Paul+Gaultier+Le+Male&tag=${TAG}`},{s:"Jomashop",p:49.99},{s:"Maxaroma",p:55.00},{s:"Macy's",p:89.25}],[{s:"FragranceNet",p:189.99,best:true,link:`https://www.amazon.com/s?k=Louis+Vuitton+Imagination&tag=${TAG}`},{s:"Jomashop",p:199.00},{s:"Amazon",p:215.00},{s:"Nordstrom",p:229.00}],
   "Sauvage": [{s:"FragranceX",p:79.99,best:true,link:`https://www.amazon.com/s?k=Dior+Sauvage+100ml+EDT&tag=${TAG}`},{s:"FragranceNet",p:83.00},{s:"Jomashop",p:85.00},{s:"Ulta",p:98.00},{s:"Amazon",p:94.20}],
   "Aventus": [{s:"FragFlex",p:289.00,best:true,link:`https://www.amazon.com/s?k=Creed+Aventus+100ml&tag=${TAG}`},{s:"Olfactory",p:295.00},{s:"Jomashop",p:299.00},{s:"Nordstrom",p:325.00},{s:"Amazon",p:325.00}],
   "Layton": [{s:"FragranceNet",p:142.00,best:true,link:`https://www.amazon.com/s?k=Parfums+de+Marly+Layton&tag=${TAG}`},{s:"Jomashop",p:149.00},{s:"Maxaroma",p:155.00},{s:"Amazon",p:169.00}],
