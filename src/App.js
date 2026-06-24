@@ -189,15 +189,7 @@ export default function App() {
           ))}
         </div>
 
-       <div style={styles.section}>
-          <div style={styles.sectionHdr}>
-            <div style={styles.sectionLbl}>Trending now</div>
-            <select value={sortBy} onChange={e => setSortBy(e.target.value)} style={{background:'#1a1a1a',border:'0.5px solid #2a2a2a',borderRadius:4,padding:'6px 10px',color:'#999',fontSize:12,fontFamily:"'DM Sans',sans-serif",cursor:'pointer'}}>
-              <option value="popularity">Most Popular</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-              <option value="name">Name: A-Z</option>
-            </select>
+       
             <div style={styles.filters}>
               {FILTERS.map(f => (
                 <button key={f.key} onClick={() => setActive(f.key)} style={{...styles.btnG, borderColor: active===f.key ? '#22c55e' : '#2a2a2a', color: active===f.key ? '#22c55e' : '#444', background: active===f.key ? 'rgba(34,197,94,0.08)' : 'none', borderRadius:20, padding:'5px 14px', fontSize:12, letterSpacing:'0.08em', textTransform:'uppercase'}}>
