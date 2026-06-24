@@ -5,10 +5,10 @@ const RETAILERS = ["Amazon","FragranceX","FragranceNet","FragFlex","Fragrance Na
 const TAG = 'scenteur-20';
 
 const PRICES = {
-  "Imagination": 
-"Le Male Elixir Absolu": [{s:"FragranceNet",p:107.00,best:true,link:`https://www.amazon.com/s?k=Jean+Paul+Gaultier+Le+Male+Elixir+Absolu&tag=${TAG}`},{s:"Jomashop",p:110.00},{s:"FragranceX",p:113.27},{s:"Macy's",p:127.50}],
+  "Imagination": [{s:"FragranceNet",p:189.99,best:true,link:`https://www.amazon.com/s?k=Louis+Vuitton+Imagination&tag=${TAG}`},{s:"Jomashop",p:199.00},{s:"Amazon",p:215.00},{s:"Nordstrom",p:229.00}],
+  "Le Male Elixir Absolu": [{s:"FragranceNet",p:107.00,best:true,link:`https://www.amazon.com/s?k=Jean+Paul+Gaultier+Le+Male+Elixir+Absolu&tag=${TAG}`},{s:"Jomashop",p:110.00},{s:"FragranceX",p:113.27},{s:"Macy's",p:127.50}],
   "Vibrato": [{s:"FragranceNet",p:99.99,best:true,link:`https://www.amazon.com/s?k=Sospiro+Vibrato&tag=${TAG}`},{s:"Jomashop",p:189.89},{s:"Amazon",p:215.00}],
-  "Le Male": [{s:"FragranceNet",p:42.89,best:true,link:`https://www.amazon.com/s?k=Jean+Paul+Gaultier+Le+Male&tag=${TAG}`},{s:"Jomashop",p:49.99},{s:"Maxaroma",p:55.00},{s:"Macy's",p:89.25}],[{s:"FragranceNet",p:189.99,best:true,link:`https://www.amazon.com/s?k=Louis+Vuitton+Imagination&tag=${TAG}`},{s:"Jomashop",p:199.00},{s:"Amazon",p:215.00},{s:"Nordstrom",p:229.00}],
+  "Le Male": [{s:"FragranceNet",p:42.89,best:true,link:`https://www.amazon.com/s?k=Jean+Paul+Gaultier+Le+Male&tag=${TAG}`},{s:"Jomashop",p:49.99},{s:"Maxaroma",p:55.00},{s:"Macy's",p:89.25}],
   "Sauvage": [{s:"FragranceX",p:79.99,best:true,link:`https://www.amazon.com/s?k=Dior+Sauvage+100ml+EDT&tag=${TAG}`},{s:"FragranceNet",p:83.00},{s:"Jomashop",p:85.00},{s:"Ulta",p:98.00},{s:"Amazon",p:94.20}],
   "Aventus": [{s:"FragFlex",p:289.00,best:true,link:`https://www.amazon.com/s?k=Creed+Aventus+100ml&tag=${TAG}`},{s:"Olfactory",p:295.00},{s:"Jomashop",p:299.00},{s:"Nordstrom",p:325.00},{s:"Amazon",p:325.00}],
   "Layton": [{s:"FragranceNet",p:142.00,best:true,link:`https://www.amazon.com/s?k=Parfums+de+Marly+Layton&tag=${TAG}`},{s:"Jomashop",p:149.00},{s:"Maxaroma",p:155.00},{s:"Amazon",p:169.00}],
@@ -93,6 +93,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [sortBy, setSortBy] = useState('popularity');
 
   useEffect(() => {
     fetch('https://scenteur-api.onrender.com/api/fragrances/top')
@@ -132,8 +133,33 @@ export default function App() {
       matchFilter = designerBrands.includes(brand);
     } else if (active === 'middle-eastern') {
       matchFilter = middleEasternBrands.includes(brand);
+    }
+    return matchSearch && matchFilter;
+  });
+  const sorted = [...filtered].sort((a, b) => {
+    if (sortBy === 'price-low') {
+      const aPrice = (PRICES[a.name] || []).find(p => p.best)?.p || 999999;
+      const bPrice = (PRICES[b.name] || []).find(p => p.best)?.p || 999999;
+      return aPrice - bPrice;
+    } else if (sortBy === 'price-high') {
+      const aPrice = (PRICES[a.name] || []).find(p => p.best)?.p || 0;
+      const bPrice = (PRICES[b.name] || []).find(p => p.best)?.p || 0;
+      return bPrice - aPrice;
+    } else if (sortBy === 'name') {
+      return (a.name || '').localeCompare(b.name || '');
+    }
+    return (b.popularityScore || 0) - (a.popularityScore || 0);
+  });
+  return (
+    <>
       <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
       <div style={styles.root}>
+        <nav style={styles.nav}>
+          <div style={styles.logo}>Scent<span style={styles.logoSpan}>eur</span></div>
+          <div style={styles.navLinks}>
+            {['Discover','Deals','Brands','Alerts'].map(l => <span key={l} style={{cursor:'pointer'}}>{l}</span>)}
+          </div>
+        </nav>
         <nav style={styles.nav}>
           <div style={styles.logo}>Scent<span style={styles.logoSpan}>eur</span></div>
           <div style={styles.navLinks}>
@@ -163,9 +189,15 @@ export default function App() {
           ))}
         </div>
 
-        <div style={styles.section}>
+       <div style={styles.section}>
           <div style={styles.sectionHdr}>
             <div style={styles.sectionLbl}>Trending now</div>
+            <select value={sortBy} onChange={e => setSortBy(e.target.value)} style={{background:'#1a1a1a',border:'0.5px solid #2a2a2a',borderRadius:4,padding:'6px 10px',color:'#999',fontSize:12,fontFamily:"'DM Sans',sans-serif",cursor:'pointer'}}>
+              <option value="popularity">Most Popular</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="name">Name: A-Z</option>
+            </select>
             <div style={styles.filters}>
               {FILTERS.map(f => (
                 <button key={f.key} onClick={() => setActive(f.key)} style={{...styles.btnG, borderColor: active===f.key ? '#22c55e' : '#2a2a2a', color: active===f.key ? '#22c55e' : '#444', background: active===f.key ? 'rgba(34,197,94,0.08)' : 'none', borderRadius:20, padding:'5px 14px', fontSize:12, letterSpacing:'0.08em', textTransform:'uppercase'}}>
