@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+
 const RETAILERS = ["Amazon","FragranceX","FragranceNet","FragFlex","Fragrance Navaeh","Jomashop","Beautyhouse","Maxaroma","Aura Fragrance","Olfactory","Mystic Perfume","Venba Fragrance","eBay","Sephora","Ulta","Nordstrom","Macy's","Walmart","Target","Beautylish"];
 
 const TAG = 'scenteur-20';
@@ -94,6 +95,7 @@ export default function App() {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
   const [sortBy, setSortBy] = useState('popularity');
+  const iframeRef = useRef(null);
 
   useEffect(() => {
     fetch('https://scenteur-api.onrender.com/api/fragrances/top')
@@ -111,11 +113,11 @@ export default function App() {
 
   const handleSubscribe = () => {
     if (!email) return;
-    fetch('https://230da550.sibforms.com/serve/MUIFAOpKxDBubhblRi_L9Zk2DgiSOaegTvJScLsvePm9qSFBMwAfb2UmJpJWA3AjCGHr4Umsx8SBGcNGOjlemz4ArHQawMCUglejaQdVm8pHQW7kKKLdWiohQaiNFEP7h0Hh1Z3cpTAu2z5jUjztv0KwxaJVGdD1Z7Fdgnez6YNmHWoCp_VgP1jUouuM7WMg3SOxJksvEwYt-DFUYw==', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: `EMAIL=${encodeURIComponent(email)}&locale=en&email_address_check=`
-    }).then(() => { setSubscribed(true); setEmail(''); }).catch(() => {});
+    const form = document.getElementById('hidden-brevo-form');
+    document.getElementById('hidden-brevo-email').value = email;
+    form.submit();
+    setSubscribed(true);
+    setEmail('');
   };
 
   const filtered = catalog.filter(f => {
@@ -136,6 +138,7 @@ export default function App() {
     }
     return matchSearch && matchFilter;
   });
+
   const sorted = [...filtered].sort((a, b) => {
     if (sortBy === 'price-low') {
       const aPrice = (PRICES[a.name] || []).find(p => p.best)?.p || 999999;
@@ -150,16 +153,18 @@ export default function App() {
     }
     return (b.popularityScore || 0) - (a.popularityScore || 0);
   });
+
   return (
     <>
       <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
+
+      <iframe ref={iframeRef} name="hidden-brevo-iframe" style={{display:'none'}} title="hidden-brevo-frame"></iframe>
+      <form id="hidden-brevo-form" target="hidden-brevo-iframe" method="POST" action="https://230da550.sibforms.com/serve/MUIFAOpKxDBubhblRi_L9Zk2DgiSOaegTvJScLsvePm9qSFBMwAfb2UmJpJWA3AjCGHr4Umsx8SBGcNGOjlemz4ArHQawMCUglejaQdVm8pHQW7kKKLdWiohQaiNFEP7h0Hh1Z3cpTAu2z5jUjztv0KwxaJVGdD1Z7Fdgnez6YNmHWoCp_VgP1jUouuM7WMg3SOxJksvEwYt-DFUYw==" style={{display:'none'}}>
+        <input type="text" id="hidden-brevo-email" name="EMAIL" />
+        <input type="hidden" name="locale" value="en" />
+      </form>
+
       <div style={styles.root}>
-        <nav style={styles.nav}>
-          <div style={styles.logo}>Scent<span style={styles.logoSpan}>eur</span></div>
-          <div style={styles.navLinks}>
-            {['Discover','Deals','Brands','Alerts'].map(l => <span key={l} style={{cursor:'pointer'}}>{l}</span>)}
-          </div>
-        </nav>
         <nav style={styles.nav}>
           <div style={styles.logo}>Scent<span style={styles.logoSpan}>eur</span></div>
           <div style={styles.navLinks}>
@@ -189,7 +194,15 @@ export default function App() {
           ))}
         </div>
 
-       
+        <div style={styles.section}>
+          <div style={styles.sectionHdr}>
+            <div style={styles.sectionLbl}>Trending now</div>
+            <select value={sortBy} onChange={e => setSortBy(e.target.value)} style={{background:'#1a1a1a',border:'0.5px solid #2a2a2a',borderRadius:4,padding:'6px 10px',color:'#999',fontSize:12,fontFamily:"'DM Sans',sans-serif",cursor:'pointer'}}>
+              <option value="popularity">Most Popular</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="name">Name: A-Z</option>
+            </select>
             <div style={styles.filters}>
               {FILTERS.map(f => (
                 <button key={f.key} onClick={() => setActive(f.key)} style={{...styles.btnG, borderColor: active===f.key ? '#22c55e' : '#2a2a2a', color: active===f.key ? '#22c55e' : '#444', background: active===f.key ? 'rgba(34,197,94,0.08)' : 'none', borderRadius:20, padding:'5px 14px', fontSize:12, letterSpacing:'0.08em', textTransform:'uppercase'}}>
@@ -200,9 +213,9 @@ export default function App() {
           </div>
 
           {loading && <div style={{textAlign:'center',color:'#555',padding:'3rem',fontSize:14}}>Loading fragrances...</div>}
-          {!loading && filtered.length === 0 && <div style={{textAlign:'center',color:'#555',padding:'3rem',fontSize:14}}>No fragrances found.</div>}
+          {!loading && sorted.length === 0 && <div style={{textAlign:'center',color:'#555',padding:'3rem',fontSize:14}}>No fragrances found.</div>}
 
-          {filtered.map(f => {
+          {sorted.map(f => {
             const prices = PRICES[f.name] || [];
             const best = prices.find(p => p.best);
             const maxP = prices.length ? Math.max(...prices.map(p => p.p)) : 0;
